@@ -1,14 +1,12 @@
 ---
-title: "Alexandre Henrique S. Dias"
-author: Alexandre Henrique
+title: "Nick Strayer's CV"
+author: Nick Strayer
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
     css: ['css/styles.css', 'resume']
     # set it to true for a self-contained HTML page but it'll take longer to render
     self_contained: true
-params:
-  PDF_EXPORT: FALSE
 ---
 
 ```{r, include=FALSE}
@@ -16,22 +14,39 @@ knitr::opts_chunk$set(
   results='asis', 
   echo = FALSE
 )
-
 library(glue)
 library(tidyverse)
-
-# Set this to true to have links turned into footnotes at the end of the document
-PDF_EXPORT <- params$PDF_EXPORT
-
-# Holds all the links that are inserted for placement at the end
+# ======================================================================
+# These variables determine how the the data is loaded and how the exports are
+# done.
+# Is data stored in google sheets? If no data will be gather from the csvs/
+# folder in project
+using_googlesheets <- TRUE
+# Just the copied URL from the sheet
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- TRUE
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- FALSE
+CV_PDF_LOC <- "https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf"
+CV_HTML_LOC <- "nickstrayer.me/cv/"
+# A global (gasp) variable that holds all the links that were inserted for
+# placement at the end
 links <- c()
-
-source('parsing_functions.R') # Functions for building sections from CSV data
-source('common_variables.R')  # Small variables for non-csv data such as intro text
-
-# Load csv with position info
-position_data <- read_csv('positions.csv')
+# ======================================================================
+# Now we source two external scripts. One contains functions for building the
+# text output and the other loads up our data from either googlesheets or csvs
+# Functions for building sections from CSV data
+source('parsing_functions.R') 
+# Load data for CV/Resume
+source('gather_data.R')
 ```
+
+
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
@@ -45,14 +60,31 @@ if(PDF_EXPORT){
 }
 ```
 
+
+Aside
+================================================================================
+
+
+![logo](logo.png){width=100%}
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+if(PDF_EXPORT){
+  glue("View this CV online with links at _{CV_HTML_LOC}_")
+} else {
+  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+}
+```
+
 Contact {#contact}
 --------------------------------------------------------------------------------
 
-- <i class="fa fa-envelope"></i> alexandre.hsd@gmail.com
-- <i class="fa fa-linkedin-in"></i> [Linkedin](https://www.linkedin.com/in/alexandre-henrique-dias/)
-- <i class="fa fa-github"></i> github.com/alexandrehsd
-- <i class="fa fa-twitter"></i> alehsdias
-- <i class="fa fa-phone"></i> (734) 645-0110
+```{r}
+contact_info %>% 
+  glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+```
+
+
 
 Language Skills {#skills}
 --------------------------------------------------------------------------------
@@ -61,15 +93,29 @@ Language Skills {#skills}
 build_skill_bars(skills)
 ```
 
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
+
+The source code is available at [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
+
+Last updated on `r Sys.Date()`.
+
+
+
 Main
 ================================================================================
 
-Alexandre Henrique S. Dias {#title}
+Nick Strayer {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
-cat(sanitize_links(intro_text))
+print_text_block(text_blocks, 'intro')
 ```
+
 
 
 Education {data-icon=graduation-cap data-concise=true}
@@ -79,6 +125,8 @@ Education {data-icon=graduation-cap data-concise=true}
 print_section(position_data, 'education')
 ```
 
+
+
 Research Experience {data-icon=laptop}
 --------------------------------------------------------------------------------
 
@@ -87,17 +135,21 @@ print_section(position_data, 'research_positions')
 ```
 
 
+
 Industry Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ::: aside
-I have worked in a variety of roles ranging from journalist to software engineer to data scientist. I like collaborative environments where I can learn from my peers. 
+```{r}
+print_text_block(text_blocks, 'industy_experience_aside')
+```
 :::
 
 ```{r}
 print_section(position_data, 'industry_positions')
 ```
 
+<!-- These breaks just force a new page so section doesnt get cut off -->
 <br>
 <br>
 <br>
@@ -106,7 +158,9 @@ Teaching Experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
 ::: aside
-I am passionate about education. I believe that no topic is too complex if the teacher is empathetic and willing to think about new methods of approaching task. 
+```{r}
+print_text_block(text_blocks, 'teaching_experience_aside')
+```
 :::
 
 ```{r}
@@ -114,12 +168,14 @@ print_section(position_data, 'teaching_positions')
 ```
 
 
+
 Selected Data Science Writing {data-icon=chart-line}
 --------------------------------------------------------------------------------
 
-
 ::: aside
-I regularly blog about data science and visualization on my blog [LiveFreeOrDichotomize.](https://livefreeordichotomize.com/)
+```{r}
+print_text_block(text_blocks, 'data_science_writing_aside')
+```
 :::
 
 ```{r}
@@ -139,13 +195,13 @@ print_section(position_data, 'about_me_press')
 <br>
 <br>
 
+
 Selected Press (By)  {data-icon=newspaper}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'by_me_press')
 ```
-
 
 
 
@@ -164,10 +220,7 @@ if(PDF_EXPORT){
   
 Links {data-icon=link}
 --------------------------------------------------------------------------------
-
 <br>
-
-
 ")
   
   walk2(links, 1:length(links), function(link, index){
@@ -175,5 +228,3 @@ Links {data-icon=link}
   })
 }
 ```
-
-
