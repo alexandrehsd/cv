@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   echo = FALSE
 )
 library(glue)
+library(fontawesome)
 library(tidyverse)
 # ======================================================================
 # These variables determine how the the data is loaded and how the exports are
@@ -44,6 +45,8 @@ links <- c()
 source('parsing_functions.R') 
 # Load data for CV/Resume
 source('gather_data.R')
+# Load SVG icons
+source('svg_icons.r')
 ```
 
 
@@ -84,11 +87,35 @@ contact_info %>%
 ```
 
 
-<!-- Language Skills {#skills} -->
-<!-- -------------------------------------------------------------------------------- -->
-
+Language Skills {#skills}
+--------------------------------------------------------------------------------
 ```{r}
-# build_skill_bars(skills)
+cat(
+  paste0("
+  <ul>
+    <li>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+    </li>
+    <li>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
+    </li>
+    <li>
+      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+    </li>
+    <li>
+      ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
+    </li>
+    <li>
+      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+    </li>
+    <li>
+      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+    </li>
+  </ul>
+  ")
+)
+# cat(cpluspluslang_svg)
+
 ```
 
 
