@@ -118,7 +118,7 @@ Industry Experience {data-icon=suitcase}
 
 <!-- ::: aside -->
 ```{r}
-# print_text_block(text_blocks, 'industy_experience_aside')
+# print_text_block(text_blocks, 'industry_experience_aside')
 ```
 <!-- ::: -->
 
@@ -145,8 +145,8 @@ print_section(position_data, 'research_positions')
 
 <!-- These breaks just force a new page so section doesnt get cut off -->
 <br>
-<br>
-<br>
+<!-- <br> -->
+<!-- <br> -->
 
 <!-- Teaching Experience {data-icon=chalkboard-teacher} -->
 <!-- -------------------------------------------------------------------------------- -->
@@ -198,15 +198,14 @@ print_section(position_data, 'data_science_writings')
 Academic Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'academic_writing_aside')
+```
+:::
+
 ```{r}
 print_section(position_data, 'academic_articles')
-```
-
-Talks {data-icon=chalkboard-teacher}
---------------------------------------------------------------------------------
-
-```{r}
-print_section(position_data, 'talks')
 ```
 
 Certificates & Courses {data-icon=certificate}
@@ -214,6 +213,13 @@ Certificates & Courses {data-icon=certificate}
 
 ```{r}
 print_section(position_data, 'certificates')
+```
+
+Talks {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'talks')
 ```
 
 ```{r}
