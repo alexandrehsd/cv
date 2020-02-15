@@ -1,6 +1,6 @@
 ---
-title: "Nick Strayer's CV"
-author: Nick Strayer
+title: "Alexandre Henrique's CV"
+author: Alexandre Henrique
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
@@ -21,19 +21,19 @@ library(tidyverse)
 # done.
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
-using_googlesheets <- TRUE
+using_googlesheets <- FALSE
 # Just the copied URL from the sheet
-positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+positions_sheet_loc <- ""
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
 # once to cache authentication
-sheet_is_publicly_readable <- TRUE
+sheet_is_publicly_readable <- FALSE
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
-PDF_EXPORT <- FALSE
-CV_PDF_LOC <- "https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf"
-CV_HTML_LOC <- "nickstrayer.me/cv/"
+PDF_EXPORT <- TRUE
+CV_PDF_LOC <- ""
+CV_HTML_LOC <- ""
 # A global (gasp) variable that holds all the links that were inserted for
 # placement at the end
 links <- c()
@@ -64,16 +64,15 @@ if(PDF_EXPORT){
 Aside
 ================================================================================
 
-
-![logo](logo.png){width=100%}
+<!-- ![logo](logo.png){width=100%} -->
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
-if(PDF_EXPORT){
-  glue("View this CV online with links at _{CV_HTML_LOC}_")
-} else {
-  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
-}
+# if(PDF_EXPORT){
+#   glue("View this CV online with links at _{CV_HTML_LOC}_")
+# } else {
+#   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+# }
 ```
 
 Contact {#contact}
@@ -81,18 +80,16 @@ Contact {#contact}
 
 ```{r}
 contact_info %>% 
-  glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+  glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
 ```
 
 
-
-Language Skills {#skills}
---------------------------------------------------------------------------------
+<!-- Language Skills {#skills} -->
+<!-- -------------------------------------------------------------------------------- -->
 
 ```{r}
-build_skill_bars(skills)
+# build_skill_bars(skills)
 ```
-
 
 
 Disclaimer {#disclaimer}
@@ -109,7 +106,7 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Alexandre Henrique Soares Dias {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
