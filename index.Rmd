@@ -135,7 +135,6 @@ print_section(position_data, 'education')
 ```
 
 
-
 Research Experience {data-icon=laptop}
 --------------------------------------------------------------------------------
 
@@ -163,7 +162,6 @@ print_section(position_data, 'research_positions')
 ```
 
 
-
 Selected Data Science Writing {data-icon=chart-line}
 --------------------------------------------------------------------------------
 
@@ -176,7 +174,6 @@ print_text_block(text_blocks, 'data_science_writing_aside')
 ```{r}
 print_section(position_data, 'data_science_writings')
 ```
-
 
 
 <!-- Selected Press (About)  {data-icon=newspaper} -->
@@ -198,15 +195,12 @@ print_section(position_data, 'data_science_writings')
 # print_section(position_data, 'by_me_press')
 ```
 
-
-
 Academic Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'academic_articles')
 ```
-
 
 Talks {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
@@ -215,7 +209,12 @@ Talks {data-icon=chalkboard-teacher}
 print_section(position_data, 'talks')
 ```
 
+Certificates & Courses {data-icon=certificate}
+--------------------------------------------------------------------------------
 
+```{r}
+print_section(position_data, 'certificates')
+```
 
 ```{r}
 if(PDF_EXPORT){
