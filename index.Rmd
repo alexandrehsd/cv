@@ -6,7 +6,7 @@ output:
   pagedown::html_resume:
     css: ['css/styles.css', 'resume']
     # set it to true for a self-contained HTML page but it'll take longer to render
-    self_contained: false
+    self_contained: true
 ---
 
 ```{r, include=FALSE}
@@ -14,12 +14,16 @@ knitr::opts_chunk$set(
   results='asis', 
   echo = FALSE
 )
+
 library(glue)
 library(fontawesome)
-library(tidyverse)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(readr)
+
 # ======================================================================
-# These variables determine how the the data is loaded and how the exports are
-# done.
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
 using_googlesheets <- FALSE
@@ -32,21 +36,16 @@ sheet_is_publicly_readable <- FALSE
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
-PDF_EXPORT <- TRUE
+PDF_EXPORT <- FALSE
 CV_PDF_LOC <- ""
 CV_HTML_LOC <- ""
 
-# ======================================================================
-# Now we source two external scripts. One contains functions for building the
-# text output and the other loads up our data from either googlesheets or csvs
-# Functions for building sections from CSV data
 source('parsing_functions.R') 
 # Load data for CV/Resume
 source('gather_data.R')
 # Load SVG icons
 source('svg_icons.r')
 ```
-
 
 
 ```{r}
@@ -125,7 +124,7 @@ Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
 <div style="font-size:10px;">
-  Made w/ R [**pagedown**](https://github.com/rstudio/pagedown).
+  Made w/ R [**pagedown**](https://github.com/rstudio/pagedown) package.
   
   The source code is available at [github.com/alexandrehsd/cv](https://github.com/alexandrehsd/cv).
   
@@ -144,12 +143,6 @@ print_text_block(text_blocks, 'intro')
 
 Industry Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
-
-<!-- ::: aside -->
-```{r}
-# print_text_block(text_blocks, 'industry_experience_aside')
-```
-<!-- ::: -->
 
 ```{r}
 print_section(position_data, 'industry_positions')
@@ -171,25 +164,7 @@ Research Experience {data-icon=laptop}
 print_section(position_data, 'research_positions')
 ```
 
-
-<!-- These breaks just force a new page so section doesnt get cut off -->
 <br>
-<!-- <br> -->
-<!-- <br> -->
-
-<!-- Teaching Experience {data-icon=chalkboard-teacher} -->
-<!-- -------------------------------------------------------------------------------- -->
-
-<!-- ::: aside -->
-```{r}
-# print_text_block(text_blocks, 'teaching_experience_aside')
-```
-<!-- ::: -->
-
-```{r}
-# print_section(position_data, 'teaching_positions')
-```
-
 
 Selected Data Science Writing {data-icon=chart-line}
 --------------------------------------------------------------------------------
@@ -202,26 +177,6 @@ print_text_block(text_blocks, 'data_science_writing_aside')
 
 ```{r}
 print_section(position_data, 'data_science_writings')
-```
-
-
-<!-- Selected Press (About)  {data-icon=newspaper} -->
-<!-- -------------------------------------------------------------------------------- -->
-
-```{r}
-# print_section(position_data, 'about_me_press')
-```
-
-
-<!-- <br> -->
-<!-- <br> -->
-
-
-<!-- Selected Press (By)  {data-icon=newspaper} -->
-<!-- -------------------------------------------------------------------------------- -->
-
-```{r}
-# print_section(position_data, 'by_me_press')
 ```
 
 Academic Publications {data-icon=book}
@@ -249,19 +204,4 @@ Talks {data-icon=chalkboard-teacher}
 
 ```{r}
 print_section(position_data, 'talks')
-```
-
-```{r}
-# if(PDF_EXPORT){
-#   cat("
-#   
-# Links {data-icon=link}
-# --------------------------------------------------------------------------------
-# <br>
-# ")
-#   
-#   walk2(links, 1:length(links), function(link, index){
-#     print(glue('{index}. {link}'))
-#   })
-# }
 ```
