@@ -1,5 +1,5 @@
 loc,text
-intro,"I have made [visualizations viewed by hundreds of thousands of people](https://www.nytimes.com/interactive/2016/08/26/us/college-student-migration.html), [sped up query times for 25 terabytes of data by an average of 4,800 times](https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/), and built [packages for R](https://github.com/nstrayer/shinysense) that let you [do magic](http://nickstrayer.me/dataDayTexas/)."
+intro,"I'm a Computer Engineer and Data Scientist. I enjoy spending my free time studying statistics, programming and reading Data Science-related articles. At work, I play my role mostly in building visualizations to clients and contributing to the company's R package."
 teaching_experience_aside,I am passionate about education. I believe that no topic is too complex if the teacher is empathetic and willing to think about new methods of approaching task. 
 data_science_writing_aside,"I am most interested in readings about data science, statistics, and AI."
 academic_writing_aside,"Paper published in the 2019 II Workshop on Metrology for Industry 4.0 and IoT (MetroInd4.0&IoT). Naples, Italy."
