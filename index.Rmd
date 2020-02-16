@@ -27,16 +27,22 @@ library(readr)
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
 using_googlesheets <- FALSE
+
 # Just the copied URL from the sheet
 positions_sheet_loc <- ""
+
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
 # once to cache authentication
 sheet_is_publicly_readable <- FALSE
+
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
 PDF_EXPORT <- FALSE
+
+# If needed to provided a link for downloading the cv, use these variables and uncomment
+# the first aside block
 CV_PDF_LOC <- ""
 CV_HTML_LOC <- ""
 

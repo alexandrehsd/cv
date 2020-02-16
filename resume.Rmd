@@ -15,9 +15,14 @@ knitr::opts_chunk$set(
   results='asis', 
   echo = FALSE
 )
-library(tidyverse)
+
 library(glue)
 library(fontawesome)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(readr)
 
 # ======================================================================
 # These variables determine how the the data is loaded and how the exports are
@@ -38,11 +43,7 @@ sheet_is_publicly_readable <- FALSE
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
-PDF_EXPORT <- FALSE
-
-# ======================================================================
-# Now we source two external scripts. One contains functions for building the
-# text output and the other loads up our data from either googlesheets or csvs
+PDF_EXPORT <- TRUE
 
 # Functions for building sections from CSV data
 source('parsing_functions.R') 
@@ -140,12 +141,12 @@ cat(
 <!-- More info {#more-info} -->
 <!-- -------------------------------------------------------------------------------- -->
 
-<!-- See full CV at nickstrayer.me/cv for more complete list of positions and publications. -->
+<!-- See full CV at alexandrehsd.me/cv for more complete list of positions and publications. -->
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made w/ R [**pagedown**](https://github.com/rstudio/pagedown). 
+Made w/ R [**pagedown**](https://github.com/rstudio/pagedown) package. 
 
 Source code: [github.com/alexandrehsd/cv](https://github.com/alexandrehsd/cv).
 
@@ -181,5 +182,3 @@ Selected Writing {data-icon=newspaper}
 ```{r}
 position_data %>% print_section('writings')
 ```
-
-
