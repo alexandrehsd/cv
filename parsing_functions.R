@@ -13,17 +13,16 @@ find_link <- regex("
 # referenced in an end-of-document list. 
 sanitize_links <- function(text){
   if(PDF_EXPORT){
-    str_extract_all(text, find_link) %>% 
-      pluck(1) %>% 
+    
+    links <- str_extract_all(text, find_link) %>% 
+      pluck(1)
+    
+    links %>% 
       walk(function(link_from_text){
         title <- link_from_text %>% str_extract('\\[.+\\]') %>% str_remove_all('\\[|\\]') 
-        link <- link_from_text %>% str_extract('\\(.+\\)') %>% str_remove_all('\\(|\\)')
-        
-        # add link to links array
-        links <<- c(links, link)
         
         # Build replacement text
-        new_text <- glue('{title}<sup>{length(links)}</sup>')
+        new_text <- glue('[<i>{title}</i>]({links})')
         
         # Replace text
         text <<- text %>% str_replace(fixed(link_from_text), new_text)
