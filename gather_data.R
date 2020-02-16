@@ -9,7 +9,7 @@ if(using_googlesheets){
     # work if your sheet has sharing set to "anyone with link can view"
     sheets_deauth()
   } else {
-    # If info is in a public sheet so there's no need to do authentication but if you want
+    # If info is in a public sheet there's no need to do authentication but if you want
     # to use a private sheet, then this is the way you need to do it.
     # designate project-specific cache so we can render Rmd without problems
     options(gargle_oauth_cache = ".secrets")
@@ -22,6 +22,7 @@ if(using_googlesheets){
   contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info", skip = 1)
   
 } else {
+  
   position_data <- read_csv("csvs/positions.csv")
   skills        <- read_csv("csvs/language_skills.csv")
   text_blocks   <- read_csv("csvs/text_blocks.csv")
