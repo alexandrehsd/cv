@@ -1,6 +1,6 @@
 ---
-title: Nick Strayer's Resume"
-author: Nick Strayer
+title: Alexandre Henrique's Resume"
+author: Alexandre Henrique
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 library(glue)
+library(fontawesome)
 
 # ======================================================================
 # These variables determine how the the data is loaded and how the exports are
@@ -24,21 +25,20 @@ library(glue)
 
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
-using_googlesheets <- TRUE
+using_googlesheets <- FALSE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+positions_sheet_loc <- ""
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
 # once to cache authentication
-sheet_is_publicly_readable <- TRUE
+sheet_is_publicly_readable <- FALSE
 
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
 PDF_EXPORT <- FALSE
-
 
 # A global (gasp) variable that holds all the links that were inserted for
 # placement at the end
@@ -53,6 +53,9 @@ source('parsing_functions.R')
 
 # Load data for CV/Resume
 source('gather_data.R')
+
+# Load SVG icons
+source('svg_icons.r')
 
 # Now we just need to filter down the position data to include less verbose
 # categories and only the entries we have designated for the resume
@@ -76,40 +79,63 @@ Aside
 
 ![logo](logo.png){width=100%}
 
+
 Contact {#contact}
 --------------------------------------------------------------------------------
 
 ```{r}
 contact_info %>% 
-  glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+  glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
 ```
-
 
 
 Language Skills {#skills}
 --------------------------------------------------------------------------------
-
 ```{r}
-build_skill_bars(skills)
+cat(
+  paste0("
+  <ul>
+    <li>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+    </li>
+    <li>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
+    </li>
+    <li>
+      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+    </li>
+    <li>
+      ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
+    </li>
+    <li>
+      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+    </li>
+    <li>
+      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+    </li>
+  </ul>
+  ")
+)
+# cat(cpluspluslang_svg)
+
 ```
 
 
 
-Open Source Contributions {#open-source}
---------------------------------------------------------------------------------
+<!-- Open Source Contributions {#open-source} -->
+<!-- -------------------------------------------------------------------------------- -->
 
-All projects available at `github.com/nstrayer/<name>`
+<!-- All projects available at `github.com/alexandrehsd/<name>` -->
+
+<!-- - `shinysense`: R package to use sensor data in Shiny apps -->
+<!-- - `tuftesque`: Hugo theme (behind LiveFreeOrDichotomize.com) -->
+<!-- - `sbmR`: R package for fitting stochasitic block models -->
 
 
-- `shinysense`: R package to use sensor data in Shiny apps
-- `tuftesque`: Hugo theme (behind LiveFreeOrDichotomize.com)
-- `sbmR`: R package for fitting stochasitic block models
+<!-- More info {#more-info} -->
+<!-- -------------------------------------------------------------------------------- -->
 
-
-More info {#more-info}
---------------------------------------------------------------------------------
-
-See full CV at nickstrayer.me/cv for more complete list of positions and publications.
+<!-- See full CV at nickstrayer.me/cv for more complete list of positions and publications. -->
 
 
 Disclaimer {#disclaimer}
@@ -117,7 +143,7 @@ Disclaimer {#disclaimer}
 
 Made w/ [**pagedown**](https://github.com/rstudio/pagedown). 
 
-Source code: [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
+Source code: [github.com/nstrayer/cv](https://github.com/alexandrehsd/cv).
 
 Last updated on `r Sys.Date()`.
 
@@ -126,7 +152,7 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Alexandre Henrique S. Dias {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
