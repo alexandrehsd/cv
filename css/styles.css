@@ -101,3 +101,12 @@ sup {
   width: 100%;
 }
 
+[data-id="main"] a {
+  color: black;
+  font-style: italic;
+}
+
+.aside a {
+  color: black;
+  font-style: italic;
+}
