@@ -1,6 +1,7 @@
 ,Icon used from font-awesome 4 to label this contact section,The actual value written for the contact entry
 loc,icon,contact
 email,envelope,alexandre.hsd@gmail.com
-github,github,https://github.com/alexandrehsd
-medium,medium,https://medium.com/@alexandre.hsd
-twitter,twitter,https://twitter.com/alehsdias
+linkedin,linkedin,[linkedin.me](https://www.linkedin.com/in/alexandre-henrique-dias/)
+github,github,[github.com/alexandrehsd](https://github.com/alexandrehsd)
+medium,medium,[medium.com/@alexandre.hsd](https://medium.com/@alexandre.hsd)
+twitter,twitter,[alehsdias](https://twitter.com/alehsdias)
