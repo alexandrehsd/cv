@@ -32,11 +32,9 @@ sheet_is_publicly_readable <- FALSE
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
-PDF_EXPORT <- FALSE
+PDF_EXPORT <- TRUE
 CV_PDF_LOC <- ""
 CV_HTML_LOC <- ""
-# A global (gasp) variable that holds all the links that were inserted for
-# placement at the end
 links <- c()
 # ======================================================================
 # Now we source two external scripts. One contains functions for building the
@@ -52,12 +50,16 @@ source('svg_icons.r')
 
 
 ```{r}
-# When in export mode the little dots are unaligned, so fix that. 
+# When in export mode the little dots are unaligned, so fix that. Set the links to black color
 if(PDF_EXPORT){
   cat("
   <style>
   :root{
     --decorator-outer-offset-left: -6.5px;
+  }
+  
+  a {
+    color: black;
   }
   </style>")
 }
@@ -250,16 +252,16 @@ print_section(position_data, 'talks')
 ```
 
 ```{r}
-if(PDF_EXPORT){
-  cat("
-  
-Links {data-icon=link}
---------------------------------------------------------------------------------
-<br>
-")
-  
-  walk2(links, 1:length(links), function(link, index){
-    print(glue('{index}. {link}'))
-  })
-}
+# if(PDF_EXPORT){
+#   cat("
+#   
+# Links {data-icon=link}
+# --------------------------------------------------------------------------------
+# <br>
+# ")
+#   
+#   walk2(links, 1:length(links), function(link, index){
+#     print(glue('{index}. {link}'))
+#   })
+# }
 ```
