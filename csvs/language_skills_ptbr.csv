@@ -1,0 +1,5 @@
+skill,icon,value
+R,r-project,"R (tidyverse, base R, desenvolvimento de bibliotecas)"
+Python,python,"Python (pandas, numpy, matplotlib, seaborn, statsmodels, SciKit-Learn)"
+SQL,database,"SQL (MySQL, Oracle)"
+Git,github-alt,"git"
