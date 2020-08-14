@@ -97,7 +97,7 @@ contact_info %>%
   glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
 ```
 
-Language Skills {#skills}
+Coding Skills {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 cat(
