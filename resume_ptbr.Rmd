@@ -1,0 +1,185 @@
+---
+title: Alexandre Henrique - CV"
+author: Alexandre Henrique
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/custom_resume.css', 'css/styles.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(glue)
+library(fontawesome)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(readr)
+
+# ======================================================================
+# These variables determine how the the data is loaded and how the exports are
+# done.
+
+# Is data stored in google sheets? If no data will be gather from the csvs/
+# folder in project
+using_googlesheets <- FALSE
+
+# Just the copied URL from the sheet
+positions_sheet_loc <- ""
+
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- FALSE
+
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- TRUE
+
+# Functions for building sections from CSV data
+source('parsing_functions.R') 
+
+# Load data for CV/Resume
+source('gather_data.R')
+
+# Load SVG icons
+source('svg_icons.r')
+
+# Now we just need to filter down the position data to include less verbose
+# categories and only the entries we have designated for the resume
+position_data <- position_data %>% 
+  filter(in_resume) %>% 
+  mutate(
+    # Build some custom sections by collapsing others
+    section = case_when(
+      section %in% c('industry_positions') ~ 'positions', 
+      section %in% c('academic_articles', 'data_science_writings') ~ 'writings',
+      TRUE ~ section
+    )
+  ) 
+```
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. Set the links to black color
+if(PDF_EXPORT){
+  cat("
+  <style>
+  :root{
+    --decorator-outer-offset-left: -6.5px;
+  }
+  
+  a {
+    color: black;
+  }
+  </style>")
+}
+```
+
+Aside
+================================================================================
+
+<!-- ![logo](logo.png){width=100%} -->
+
+Contato {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+contact_info_ptbr %>% 
+  glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
+```
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+```{r}
+# Add statistical Modeling
+cat(
+  paste0("
+  <ul>
+    <li>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+    </li>
+    <li>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
+    </li>
+    <li>
+      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+    </li>
+    <li>
+      ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
+    </li>
+    <li>
+      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+    </li>
+    <li>
+      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+    </li>
+  </ul>
+  ")
+)
+# cat(cpluspluslang_svg)
+
+```
+
+<!-- Open Source Contributions {#open-source} -->
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- All projects available at `github.com/alexandrehsd/<name>` -->
+
+<!-- - `shinysense`: R package to use sensor data in Shiny apps -->
+<!-- - `tuftesque`: Hugo theme (behind LiveFreeOrDichotomize.com) -->
+<!-- - `sbmR`: R package for fitting stochasitic block models -->
+
+
+<!-- More info {#more-info} -->
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- See full CV at alexandrehsd.me/cv for more complete list of positions and publications. -->
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Feito com a biblioteca R [**pagedown**](https://github.com/rstudio/pagedown) . 
+
+Código fonte: [github.com/alexandrehsd/cv](https://github.com/alexandrehsd/cv).
+
+Atualizado em `r Sys.Date()`.
+
+Main
+================================================================================
+
+Alexandre H. S. Dias {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+print_text_block(text_blocks, 'intro')
+```
+
+Experiência {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data_ptbr %>% print_section('positions')
+```
+
+Educação {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data_ptbr %>% print_section('education')
+```
+
+Artigos {data-icon=newspaper}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data_ptbr %>% print_section('writings')
+```
