@@ -28,5 +28,11 @@ if(using_googlesheets){
   text_blocks   <- read_csv("csvs/text_blocks.csv")
   contact_info  <- read_csv("csvs/contact_info.csv", skip = 1)
   
+  # Add data in brazilian portuguese
+  position_data_ptbr <- read_csv("csvs/positions_ptbr.csv")
+  skills_ptbr        <- read_csv("csvs/language_skills_ptbr.csv")
+  text_blocks_ptbr   <- read_csv("csvs/text_blocks_ptbr.csv")
+  contact_info_ptbr  <- read_csv("csvs/contact_info_ptbr.csv", skip = 1)
+  
 }
 
