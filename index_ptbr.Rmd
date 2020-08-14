@@ -1,0 +1,214 @@
+---
+title: "Alexandre Henrique's CV"
+author: Alexandre Henrique
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/styles.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(glue)
+library(fontawesome)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(readr)
+
+# ======================================================================
+# Is data stored in google sheets? If no data will be gather from the csvs/
+# folder in project
+using_googlesheets <- FALSE
+
+# Just the copied URL from the sheet
+positions_sheet_loc <- ""
+
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- FALSE
+
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- FALSE
+
+# If needed to provided a link for downloading the cv, use these variables and uncomment
+# the first aside block
+CV_PDF_LOC <- ""
+CV_HTML_LOC <- ""
+
+source('parsing_functions.R') 
+# Load data for CV/Resume
+source('gather_data.R')
+# Load SVG icons
+source('svg_icons.r')
+```
+
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. Set the links to black color
+if(PDF_EXPORT){
+  cat("
+  <style>
+  :root{
+    --decorator-outer-offset-left: -6.5px;
+  }
+  
+  a {
+    color: black;
+  }
+  </style>")
+}
+```
+
+
+Aside
+================================================================================
+
+<!-- ![logo](logo.png){width=100%} -->
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+# if(PDF_EXPORT){
+#   glue("View this CV online with links at _{CV_HTML_LOC}_")
+# } else {
+#   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+# }
+```
+
+Contato {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+contact_info_ptbr %>% 
+  glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
+```
+
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+```{r}
+# Add statistical Modeling
+cat(
+  paste0("
+  <ul>
+    <li>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+    </li>
+    <li>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
+    </li>
+    <li>
+      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+    </li>
+    <li>
+      ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
+    </li>
+    <li>
+      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+    </li>
+    <li>
+      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+    </li>
+  </ul>
+  ")
+)
+# cat(cpluspluslang_svg)
+
+```
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+<div style="font-size:10px;">
+  Feito com a biblioteca R [**pagedown**](https://github.com/rstudio/pagedown) . 
+
+  Código fonte: [github.com/alexandrehsd/cv](https://github.com/alexandrehsd/cv).
+
+  Atualizado em `r Sys.Date()`.
+</div>
+
+Main
+================================================================================
+
+Alexandre H. S. Dias {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+print_text_block(text_blocks_ptbr, 'intro')
+```
+
+Experiência {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data_ptbr, 'industry_positions')
+```
+
+
+Educação {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data_ptbr, 'education')
+```
+
+
+Experiência acadêmica {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data_ptbr, 'research_positions')
+```
+
+<br>
+
+Artigos {data-icon=chart-line}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks_ptbr, 'data_science_writing_aside')
+```
+:::
+
+```{r}
+print_section(position_data_ptbr, 'data_science_writings')
+```
+
+Publicações {data-icon=book}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks_ptbr, 'academic_writing_aside')
+```
+:::
+
+```{r}
+print_section(position_data_ptbr, 'academic_articles')
+```
+
+Certificados e Cursos {data-icon=certificate}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data_ptbr, 'certificates')
+```
+
+Palestras {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data_ptbr, 'talks')
+```
