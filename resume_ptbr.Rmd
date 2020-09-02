@@ -56,7 +56,7 @@ source('svg_icons.r')
 
 # Now we just need to filter down the position data to include less verbose
 # categories and only the entries we have designated for the resume
-position_data <- position_data %>% 
+position_data_ptbr <- position_data_ptbr %>% 
   filter(in_resume) %>% 
   mutate(
     # Build some custom sections by collapsing others
@@ -97,7 +97,7 @@ contact_info_ptbr %>%
   glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
 ```
 
-Skills {#skills}
+Habilidades {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 # Add statistical Modeling
@@ -160,10 +160,10 @@ Alexandre H. S. Dias {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
-print_text_block(text_blocks, 'intro')
+print_text_block(text_blocks_ptbr, 'intro')
 ```
 
-Experiência {data-icon=suitcase}
+Experiências {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ```{r}
