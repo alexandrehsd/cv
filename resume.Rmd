@@ -30,11 +30,11 @@ library(readr)
 
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
-using_googlesheets <- FALSE
+using_googlesheets <- TRUE
 
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- ""
+positions_sheet_loc <- read.table("spreadsheet_url.txt", header=FALSE)$V1
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -44,16 +44,16 @@ sheet_is_publicly_readable <- FALSE
 # Is the goal of this knit to build a document that is exported to PDF? If so
 # set this to true to have links turned into footnotes at the end of the
 # document
-PDF_EXPORT <- TRUE
+PDF_EXPORT <- FALSE
 
 # Functions for building sections from CSV data
-source('parsing_functions.R') 
+source('./rcode/parsing_functions.R')
 
 # Load data for CV/Resume
-source('gather_data.R')
+source('./rcode/gather_data.R')
 
 # Load SVG icons
-source('svg_icons.r')
+source('./rcode/svg_icons.r')
 
 # Now we just need to filter down the position data to include less verbose
 # categories and only the entries we have designated for the resume
@@ -63,7 +63,7 @@ position_data <- position_data %>%
     # Build some custom sections by collapsing others
     section = case_when(
       section %in% c('industry_positions') ~ 'positions', 
-      section %in% c('academic_articles', 'data_science_writings') ~ 'writings',
+      section %in% c('data_science_writings') ~ 'writings',
       TRUE ~ section
     )
   ) 
@@ -105,27 +105,23 @@ cat(
   paste0("
   <ul>
     <li>
-      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+      ", tensorflow," <span style='font-size:8.5px;'>Tensorflow 2.0</span>
     </li>
     <li>
-      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
-    </li>
-    <li>
-      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python 3 (pandas, numpy, matplotlib, seaborn, statsmodels, Scikit-Learn)</span>
     </li>
     <li>
       ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
     </li>
     <li>
-      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
     </li>
     <li>
-      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+      ", fa('database')," <span style='font-size:8.5px;'>Relational Databases</span>
     </li>
   </ul>
   ")
 )
-# cat(cpluspluslang_svg)
 
 ```
 
@@ -139,10 +135,10 @@ cat(
 <!-- - `sbmR`: R package for fitting stochasitic block models -->
 
 
-<!-- More info {#more-info} -->
-<!-- -------------------------------------------------------------------------------- -->
+More info {#more-info}
+--------------------------------------------------------------------------------
 
-<!-- See full CV at alexandrehsd.me/cv for more complete list of positions and publications. -->
+See full CV at [alexandrehsd.github.io/cv/](https://alexandrehsd.github.io/cv/) for more complete list of positions and publications.
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
@@ -163,7 +159,7 @@ Alexandre Henrique S. Dias {#title}
 print_text_block(text_blocks, 'intro')
 ```
 
-Selected Positions {data-icon=suitcase}
+Positions {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ```{r}
