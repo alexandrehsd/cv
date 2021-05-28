@@ -26,10 +26,10 @@ library(readr)
 # ======================================================================
 # Is data stored in google sheets? If no data will be gather from the csvs/
 # folder in project
-using_googlesheets <- FALSE
+using_googlesheets <- TRUE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- ""
+positions_sheet_loc <- read.table("spreadsheet_url.txt", header=FALSE)$V1
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -43,14 +43,16 @@ PDF_EXPORT <- FALSE
 
 # If needed to provided a link for downloading the cv, use these variables and uncomment
 # the first aside block
-CV_PDF_LOC <- ""
-CV_HTML_LOC <- ""
+CV_PDF_LOC <- "https://github.com/alexandrehsd/cv/raw/master/Alexandre-Henrique-CV.pdf"
+CV_HTML_LOC <- "https://alexandrehsd.github.io/cv/"
 
-source('parsing_functions.R') 
+source('./rcode/parsing_functions.R')
+
 # Load data for CV/Resume
-source('gather_data.R')
+source('./rcode/gather_data.R')
+
 # Load SVG icons
-source('svg_icons.r')
+source('./rcode/svg_icons.r')
 ```
 
 
@@ -74,15 +76,15 @@ if(PDF_EXPORT){
 Aside
 ================================================================================
 
-<!-- ![logo](logo.png){width=100%} -->
+<!-- ![logo](./visuals/logo.png){width=100%} -->
 
 ```{r}
-# When in export mode the little dots are unaligned, so fix that. 
-# if(PDF_EXPORT){
-#   glue("View this CV online with links at _{CV_HTML_LOC}_")
-# } else {
-#   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
-# }
+# When in export mode the little dots are unaligned, so fix that.
+if(PDF_EXPORT){
+  glue("View this CV online with links at _{CV_HTML_LOC}_")
+} else {
+  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+}
 ```
 
 Contact {#contact}
@@ -94,29 +96,26 @@ contact_info %>%
 ```
 
 
-Language Skills {#skills}
+Languages and Frameworks {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 cat(
   paste0("
   <ul>
     <li>
-      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+      ", tensorflow," <span style='font-size:8.5px;'>Tensorflow 2.0</span>
     </li>
     <li>
-      ", fa('python'),"  <span style='font-size:8.5px;'>Python (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-Learn)</span>
-    </li>
-    <li>
-      ", fa('database')," <span style='font-size:8.5px;'>SQL (MySQL, Oracle)</span>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python 3 (pandas, numpy, matplotlib, seaborn, statsmodels, Scikit-Learn)</span>
     </li>
     <li>
       ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
     </li>
     <li>
-      ", clang_svg," <span style='font-size:8.5px;'> C (Parallel Programming with OpenMP, pthreads and MPI)</span>
+      ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
     </li>
     <li>
-      ", cpluspluslang_svg," <span style='font-size:8.5px;'> C++ </span>
+      ", fa('database')," <span style='font-size:8.5px;'>Relational Databases</span>
     </li>
   </ul>
   ")
@@ -124,7 +123,6 @@ cat(
 # cat(cpluspluslang_svg)
 
 ```
-
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
