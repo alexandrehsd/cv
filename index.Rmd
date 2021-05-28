@@ -43,7 +43,7 @@ PDF_EXPORT <- FALSE
 
 # If needed to provided a link for downloading the cv, use these variables and uncomment
 # the first aside block
-CV_PDF_LOC <- "https://github.com/alexandrehsd/cv/raw/master/Alexandre-Henrique-CV.pdf"
+CV_PDF_LOC <- "https://github.com/alexandrehsd/cv/raw/master/pdfs/alexandrehsd_cv.pdf"
 CV_HTML_LOC <- "https://alexandrehsd.github.io/cv/"
 
 source('./rcode/parsing_functions.R')
@@ -86,6 +86,7 @@ if(PDF_EXPORT){
   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
 }
 ```
+
 
 Contact {#contact}
 --------------------------------------------------------------------------------
