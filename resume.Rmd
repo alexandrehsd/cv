@@ -138,7 +138,7 @@ cat(
 More info {#more-info}
 --------------------------------------------------------------------------------
 
-See full CV at [alexandrehsd.github.io/cv/](https://alexandrehsd.github.io/cv/) for more complete list of positions and publications.
+See full CV at [alexandrehsd.github.io/cv/](https://alexandrehsd.github.io/cv/) for a complete list of positions and publications.
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
