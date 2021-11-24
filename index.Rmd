@@ -97,7 +97,7 @@ contact_info %>%
 ```
 
 
-Languages and Frameworks {#skills}
+Programming Skills {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 cat(
@@ -107,22 +107,22 @@ cat(
       ", tensorflow," <span style='font-size:8.5px;'>Tensorflow 2.0</span>
     </li>
     <li>
-      ", fa('python'),"  <span style='font-size:8.5px;'>Python 3 (pandas, numpy, matplotlib, seaborn, statsmodels, Scikit-Learn)</span>
-    </li>
-    <li>
-      ", fa('github-alt')," <span style='font-size:8.5px;'>git (and GitHub)</span>
+      ", fa('python'),"  <span style='font-size:8.5px;'>Python 3 (pandas, numpy, scipy, matplotlib, Scikit-Learn, NetworkX)</span>
     </li>
     <li>
       ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
     </li>
     <li>
-      ", fa('database')," <span style='font-size:8.5px;'>Relational Databases</span>
+      ", fa('database')," <span style='font-size:8.5px;'>SQL</span>
+    </li>
+    <li>
+      ", fa('github-alt')," <span style='font-size:8.5px;'>git</span>
     </li>
   </ul>
   ")
 )
 # cat(cpluspluslang_svg)
-
+# Add SQL and netowrkX
 ```
 
 Disclaimer {#disclaimer}
@@ -171,18 +171,18 @@ print_section(position_data, 'research_positions')
 
 <br>
 
-Selected Data Science Writing {data-icon=chart-line}
---------------------------------------------------------------------------------
+<!-- Selected Data Science Writing {data-icon=chart-line} -->
+<!-- -------------------------------------------------------------------------------- -->
 
-::: aside
-```{r}
-print_text_block(text_blocks, 'data_science_writing_aside')
-```
-:::
+<!-- ::: aside -->
+<!-- ```{r} -->
+<!-- print_text_block(text_blocks, 'data_science_writing_aside') -->
+<!-- ``` -->
+<!-- ::: -->
 
-```{r}
-print_section(position_data, 'data_science_writings')
-```
+<!-- ```{r} -->
+<!-- print_section(position_data, 'data_science_writings') -->
+<!-- ``` -->
 
 Academic Publications {data-icon=book}
 --------------------------------------------------------------------------------
@@ -197,16 +197,16 @@ print_text_block(text_blocks, 'academic_writing_aside')
 print_section(position_data, 'academic_articles')
 ```
 
-Certificates & Courses {data-icon=certificate}
---------------------------------------------------------------------------------
+<!-- Certificates & Courses {data-icon=certificate} -->
+<!-- -------------------------------------------------------------------------------- -->
 
-```{r}
-print_section(position_data, 'certificates')
-```
+<!-- ```{r} -->
+<!-- print_section(position_data, 'certificates') -->
+<!-- ``` -->
 
-Talks {data-icon=chalkboard-teacher}
---------------------------------------------------------------------------------
+<!-- Talks {data-icon=chalkboard-teacher} -->
+<!-- -------------------------------------------------------------------------------- -->
 
-```{r}
-print_section(position_data, 'talks')
-```
+<!-- ```{r} -->
+<!-- print_section(position_data, 'talks') -->
+<!-- ``` -->
