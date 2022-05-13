@@ -29,7 +29,8 @@ library(readr)
 using_googlesheets <- TRUE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- read.table("spreadsheet_url.txt", header=FALSE)$V1
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1OAgJ0bh1iPgabzCWRKrSsVb7Ny5jLDtdzV27eTfwCT8/" 
+# read.table("spreadsheet_url.txt", header=FALSE)$V1
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -97,7 +98,7 @@ contact_info %>%
 ```
 
 
-Programming Skills {#skills}
+Tech Skills {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 cat(
@@ -113,6 +114,9 @@ cat(
       ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
     </li>
     <li>
+      ", fa('docker')," <span style='font-size:8.5px;'>Kubernetes and Docker</span>
+    </li>
+    <li>
       ", fa('database')," <span style='font-size:8.5px;'>SQL</span>
     </li>
     <li>
@@ -123,6 +127,7 @@ cat(
 )
 # cat(cpluspluslang_svg)
 # Add SQL and netowrkX
+# Add kubernetes and kubeflow
 ```
 
 Disclaimer {#disclaimer}
@@ -162,27 +167,20 @@ print_section(position_data, 'education')
 ```
 
 
+Certificates & Courses {data-icon=certificate}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'certificates')
+```
+
+
 Research Experience {data-icon=laptop}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'research_positions')
 ```
-
-<br>
-
-<!-- Selected Data Science Writing {data-icon=chart-line} -->
-<!-- -------------------------------------------------------------------------------- -->
-
-<!-- ::: aside -->
-<!-- ```{r} -->
-<!-- print_text_block(text_blocks, 'data_science_writing_aside') -->
-<!-- ``` -->
-<!-- ::: -->
-
-<!-- ```{r} -->
-<!-- print_section(position_data, 'data_science_writings') -->
-<!-- ``` -->
 
 Academic Publications {data-icon=book}
 --------------------------------------------------------------------------------
@@ -197,12 +195,19 @@ print_text_block(text_blocks, 'academic_writing_aside')
 print_section(position_data, 'academic_articles')
 ```
 
-<!-- Certificates & Courses {data-icon=certificate} -->
-<!-- -------------------------------------------------------------------------------- -->
 
-<!-- ```{r} -->
-<!-- print_section(position_data, 'certificates') -->
-<!-- ``` -->
+Selected Data Science Writing {data-icon=chart-line}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks, 'data_science_writing_aside')
+```
+:::
+
+```{r}
+print_section(position_data, 'data_science_writings')
+```
 
 <!-- Talks {data-icon=chalkboard-teacher} -->
 <!-- -------------------------------------------------------------------------------- -->
