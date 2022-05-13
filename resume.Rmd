@@ -34,7 +34,8 @@ using_googlesheets <- TRUE
 
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- read.table("spreadsheet_url.txt", header=FALSE)$V1
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1OAgJ0bh1iPgabzCWRKrSsVb7Ny5jLDtdzV27eTfwCT8/" 
+# read.table("spreadsheet_url.txt", header=FALSE)$V1
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -57,16 +58,16 @@ source('./rcode/svg_icons.r')
 
 # Now we just need to filter down the position data to include less verbose
 # categories and only the entries we have designated for the resume
-position_data <- position_data %>% 
-  filter(in_resume) %>% 
+position_data <- position_data %>%
+  filter(in_resume) %>%
   mutate(
     # Build some custom sections by collapsing others
     section = case_when(
-      section %in% c('industry_positions') ~ 'positions', 
+      section %in% c('industry_positions') ~ 'positions',
       section %in% c('data_science_writings') ~ 'writings',
       TRUE ~ section
     )
-  ) 
+  )
 ```
 
 ```{r}
@@ -98,7 +99,7 @@ contact_info %>%
   glue_data("- <i class='fa fa-{icon}' style='font-size:10px;'></i> <span style='font-size:8.5px;'>{contact}</span>")
 ```
 
-Programming Skills {#skills}
+Tech Skills {#skills}
 --------------------------------------------------------------------------------
 ```{r}
 cat(
@@ -112,6 +113,9 @@ cat(
     </li>
     <li>
       ", fa('r-project')," <span style='font-size:8.5px;'>R (tidyverse, base R, package development)</span>
+    </li>
+    <li>
+      ", fa('docker')," <span style='font-size:8.5px;'>Kubernetes and Docker</span>
     </li>
     <li>
       ", fa('database')," <span style='font-size:8.5px;'>SQL</span>
@@ -172,6 +176,15 @@ Education {data-icon=graduation-cap data-concise=true}
 ```{r}
 position_data %>% print_section('education')
 ```
+
+
+<!-- Certificates & Courses {data-icon=certificate} -->
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- ```{r} -->
+<!-- print_section(position_data, 'certificates') -->
+<!-- ``` -->
+
 
 <!-- Selected Writing {data-icon=newspaper} -->
 <!-- -------------------------------------------------------------------------------- -->
