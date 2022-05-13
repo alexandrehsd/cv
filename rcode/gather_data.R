@@ -4,6 +4,10 @@ if(using_googlesheets){
   
   library(googlesheets4)
   
+  # load/refresh existing credentials, if available
+  # otherwise, go to browser for authentication and authorization
+  gs4_auth()
+  
   if(sheet_is_publicly_readable){
     # This tells google sheets to not try and authenticate. Note that this will only
     # work if your sheet has sharing set to "anyone with link can view"
