@@ -174,14 +174,6 @@ Certificates & Courses {data-icon=certificate}
 print_section(position_data, 'certificates')
 ```
 
-
-Research Experience {data-icon=laptop}
---------------------------------------------------------------------------------
-
-```{r}
-print_section(position_data, 'research_positions')
-```
-
 Academic Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
@@ -195,6 +187,12 @@ print_text_block(text_blocks, 'academic_writing_aside')
 print_section(position_data, 'academic_articles')
 ```
 
+Research Experience {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'research_positions')
+```
 
 Selected Data Science Writing {data-icon=chart-line}
 --------------------------------------------------------------------------------
